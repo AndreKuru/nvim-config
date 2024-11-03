@@ -44,3 +44,25 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+vim.keymap.set('n', '<leader>tw', '<cmd>set wrap!<CR>', { desc = '[T]oggle [w]rap lines' })
+vim.keymap.set('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle show [r]elative number' })
+
+vim.keymap.set('n', '<leader>ou', function()
+  local url = vim.fn.expand '<cWORD>'
+  vim.fn.jobstart { 'chrome', url }
+end, { desc = '[O]pen url [u]nder cursor' })
+
+vim.keymap.set('n', '<leader>og', function()
+  local cursor_line = vim.fn.getline '.'
+  local cursor_column = vim.fn.col '.'
+  local opening_quote_pos = cursor_line:sub(1, cursor_column - 1):find "'[^']*$"
+  local closing_quote_pos = cursor_line:find("'", opening_quote_pos + 1)
+  local url = opening_quote_pos and closing_quote_pos and cursor_line:sub(opening_quote_pos + 1, closing_quote_pos - 1) or ''
+  if url ~= '' then
+    url = 'https://github.com/' .. url
+    vim.fn.jobstart { 'chrome', url }
+  else
+    print 'No URL found.'
+  end
+end, { desc = '[O]pen [g]it owner/repository url format under cursor' })
