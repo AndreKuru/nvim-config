@@ -217,6 +217,23 @@ return {
         -- yamlls = {},
 
         omnisharp = {},
+        powershell_es = {},
+
+        texlab = {
+          settings = {
+            texlab = {
+              build = {
+                executable = 'latexmk',
+                args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
+                onSave = true,
+              },
+              forwardSearch = {
+                executable = 'zathura',
+                args = { '--synctex-forward', '%l:1:%f', '%p' },
+              },
+            },
+          },
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -241,6 +258,8 @@ return {
       --
       --  You can press `g?` for help in this menu.
       require('mason').setup()
+
+      vim.keymap.set('n', '<leader>m', '<cmd>Mason<CR>', { desc = '[M]ason package manager' })
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.

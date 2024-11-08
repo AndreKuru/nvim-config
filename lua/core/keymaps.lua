@@ -66,3 +66,6 @@ vim.keymap.set('n', '<leader>og', function()
     print 'No URL found.'
   end
 end, { desc = '[O]pen [g]it owner/repository url format under cursor' })
+
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll half page and center screen' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll half page and center screen' })

@@ -29,18 +29,20 @@ require('lazy').setup({
   require 'plugins.autoformat',
   require 'plugins.autocompletion',
   require 'plugins.themes.tokyonight',
+  require 'plugins.emoji',
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
   require 'plugins.mini',
   require 'plugins.treesitter',
+  require 'plugins.neo-tree',
+  require 'plugins.vimtex',
 
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 }, {
   ui = {
