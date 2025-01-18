@@ -31,6 +31,7 @@ require('lazy').setup({
   require 'plugins.autocompletion',
   require 'plugins.themes.tokyonight',
   require 'plugins.emoji',
+  require 'plugins.sql',
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
