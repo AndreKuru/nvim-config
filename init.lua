@@ -33,6 +33,8 @@ require('lazy').setup({
   require 'plugins.emoji',
   require 'plugins.sql',
   require 'plugins.lazygit',
+  require 'plugins.yazi',
+  require 'plugins.oil',
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
