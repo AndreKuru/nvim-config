@@ -13,7 +13,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-vim.keymap.set('n', '<leader>l', '<cmd>Lazy<CR>', { desc = '[L]azy plugin manager' })
+vim.keymap.set('n', '<leader>l ', '<cmd>Lazy<CR>', { desc = '[L]azy plugin manager' })
 vim.keymap.set('n', '<leader>li', '<cmd>Lazy install<CR>', { desc = '[I]nstall Plugins' })
 vim.keymap.set('n', '<leader>lu', '<cmd>Lazy update<CR>', { desc = '[U]pdate Plugins' })
 vim.keymap.set('n', '<leader>ls', '<cmd>Lazy sync<CR>', { desc = '[S]ync Plugins' })
@@ -32,6 +32,7 @@ require('lazy').setup({
   require 'plugins.themes.tokyonight',
   require 'plugins.emoji',
   require 'plugins.sql',
+  require 'plugins.lazygit',
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
