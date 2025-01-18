@@ -29,20 +29,20 @@ return {
     local dapui = require 'dapui'
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
-      { '<F5>', dap.continue, desc = 'Debug: Start/Continue' },
-      { '<F1>', dap.step_into, desc = 'Debug: Step Into' },
-      { '<F2>', dap.step_over, desc = 'Debug: Step Over' },
-      { '<F3>', dap.step_out, desc = 'Debug: Step Out' },
-      { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
+      { '<leader>ds', dap.continue, desc = '[D]ebug: [S]tart/Continue' },
+      { '<leader>di', dap.step_into, desc = '[D]ebug: Step [I]nto' },
+      { '<leader>dv', dap.step_over, desc = '[D]ebug: Step O[v]er' },
+      { '<leader>do', dap.step_out, desc = '[D]ebug: Step [O]ut' },
+      { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle [B]reakpoint' },
       {
         '<leader>B',
         function()
           dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end,
-        desc = 'Debug: Set Breakpoint',
+        desc = 'Debug: Set [B]reakpoint',
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-      { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
+      { '<leader>dl', dapui.toggle, desc = '[D]ebug: [L]ast Session Result.' },
       unpack(keys),
     }
   end,
@@ -63,7 +63,8 @@ return {
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
-        'delve',
+        -- 'delve',
+        'python',
       },
     }
 
