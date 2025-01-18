@@ -216,7 +216,8 @@ return {
         jsonls = {},
         -- yamlls = {},
 
-        omnisharp = {},
+        roslyn = {},
+        -- omnisharp = {},
         powershell_es = {},
 
         texlab = {
@@ -257,7 +258,12 @@ return {
       --    :Mason
       --
       --  You can press `g?` for help in this menu.
-      require('mason').setup()
+      require('mason').setup {
+        registries = {
+          'github:mason-org/mason-registry',
+          'github:crashdummyy/mason-registry',
+        },
+      }
 
       vim.keymap.set('n', '<leader>m', '<cmd>Mason<CR>', { desc = '[M]ason package manager' })
 

@@ -26,6 +26,7 @@ require('lazy').setup({
   require 'plugins.which-key',
   require 'plugins.telescope',
   require 'plugins.lsp',
+  require 'plugins.roslyn',
   require 'plugins.autoformat',
   require 'plugins.autocompletion',
   require 'plugins.themes.tokyonight',
