@@ -49,17 +49,62 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- Telescope picker. This is really useful to discover what Telescope can
     -- do as well as how to actually do it!
 
+    local telescope_display_absolute_path = true
+    local function toggle_path()
+      telescope_display_absolute_path = not telescope_display_absolute_path
+      local new_path_display = telescope_display_absolute_path and { 'absolute' } or { 'tail' }
+
+      local picker = require('telescope.actions.state').get_current_picker()
+      picker.path_display = new_path_display
+      print('Telescope path_display set to: ' .. new_path_display)
+
+      -- require('telescope').setup {
+      --   defaults = {
+      --     path_display = new_path_display,
+      --   },
+      -- }
+    end
+
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
-      --  All the info you're looking for is in `:help telescope.setup()`
+      -- All the info you're looking for is in `:help telescope.setup()`
       --
-      -- defaults = {
-      --   mappings = {
-      --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-      --   },
-      -- },
+      defaults = {
+        path_display = { 'truncate' },
+        mappings = {
+          i = {
+            -- ['<C-enter>'] = 'to_fuzzy_refine'
+            ['<C-V>'] = false,
+            ['<C-_>'] = require('telescope.actions').which_key,
+            ['<C-X>'] = require('telescope.actions').select_vertical,
+            ['<C-S>'] = require('telescope.actions').select_horizontal,
+            ['<M-p>'] = require('telescope.actions.layout').toggle_preview,
+            ['<M-d>'] = toggle_path,
+          },
+          n = {
+            ['<C-V>'] = false,
+            ['<C-_>'] = require('telescope.actions').which_key,
+            ['<C-X>'] = require('telescope.actions').select_vertical,
+            ['<C-S>'] = require('telescope.actions').select_horizontal,
+            ['<M-p>'] = require('telescope.actions.layout').toggle_preview,
+            ['<M-d>'] = toggle_path,
+          },
+        },
+        lsp_references = {
+          entry_maker = function(entry)
+            return {
+              value = entry,
+              display = entry.filename, -- Show only the filename
+              ordinal = entry.filename, -- Also use filename for sorting
+            }
+          end,
+        },
+      },
+      preview = {
+        hide_on_startup = true,
+      },
       -- pickers = {}
       extensions = {
         ['ui-select'] = {

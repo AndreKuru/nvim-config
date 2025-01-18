@@ -157,3 +157,18 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
+
+vim.o.tabstop = 4
+vim.o.expandtab = true
+vim.o.shiftwidth = 0
+
+vim.g.man_provider = function(section, topic)
+  return {
+    cmd = 'wsl',
+    args = {
+      'man',
+      section,
+      topic,
+    },
+  }
+end
