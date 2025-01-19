@@ -319,7 +319,7 @@ return {
         },
       }
 
-      vim.keymap.set('n', '\\', ':Neotree toggle left reveal<CR>', { desc = 'Open Neotree at the current file', noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>on', ':Neotree toggle left reveal<CR>', { desc = '[O]pen [N]eoTree at the current file', noremap = true, silent = true })
     end,
   },
 }

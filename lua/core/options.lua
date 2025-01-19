@@ -92,6 +92,7 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
+-- https://www.nerdfonts.com/cheat-sheet
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -106,7 +107,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = 'a'
+vim.opt.mouse = 'nvih'
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -172,3 +173,5 @@ vim.g.man_provider = function(section, topic)
     },
   }
 end
+
+vim.opt_local.formatoptions = 'jcrql'

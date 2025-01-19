@@ -3,21 +3,30 @@ return {
   'mikavilpas/yazi.nvim',
   event = 'VeryLazy',
   keys = {
-    -- 👇 in this section, choose your own keymappings!
-    { '<leader>\\', mode = { 'n', 'v' }, '<cmd>Yazi<cr>', desc = 'Yazi at the Current File' },
-    { '<leader>-', mode = { 'n', 'v' }, '<cmd>Yazi cwd<cr>', desc = 'Yazi at the Working Directory' },
+    { '<leader>oy', mode = { 'n', 'v' }, '<cmd>Yazi<cr>', desc = '[O]pen [Y]azi at the current file' },
+    { '<leader>ow', mode = { 'n', 'v' }, '<cmd>Yazi cwd<cr>', desc = '[O]pen Yazi at the [w]orking directory' },
     {
-      '<c-up>',
+      '<leader>ol',
       '<cmd>Yazi toggle<cr>',
-      desc = 'Resume the last yazi session',
+      desc = '[O]pen the [l]ast Yazi session',
     },
   },
   ---@type YaziConfig
   opts = {
-    -- if you want to open yazi instead of netrw, see below for more info
     open_for_directories = false,
     keymaps = {
       show_help = '',
     },
   },
+  init = function()
+    if pcall(require, 'which-key') and pcall(require, 'mini.icons') then
+      local wk = require 'which-key'
+      local mini = require 'mini.icons'
+      wk.add {
+        { '<leader>oy', icon = { icon = mini.get('filetype', 'dirpager'), color = 'purple' } },
+        { '<leader>ow', icon = { icon = mini.get('filetype', 'dirpager'), color = 'purple' } },
+        { '<leader>ol', icon = { icon = mini.get('filetype', 'dirpager'), color = 'purple' } },
+      }
+    end
+  end,
 }

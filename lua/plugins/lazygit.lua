@@ -8,13 +8,17 @@ return {
     'LazyGitFilter',
     'LazyGitFilterCurrentFile',
   },
-  -- optional for floating window border decoration
   dependencies = {
-    'nvim-lua/plenary.nvim',
+    'nvim-lua/plenary.nvim', -- optional for floating window border decoration
   },
-  -- setting the keybinding for LazyGit with 'keys' is recommended in
-  -- order to load the plugin when the command is run for the first time
   keys = {
     { '<leader>lg', '<cmd>LazyGit<cr>', desc = '[L]azy[G]it' },
   },
+  init = function()
+    if pcall(require, 'which-key') and pcall(require, 'mini.icons') then
+      local wk = require 'which-key'
+      local mini = require 'mini.icons'
+      wk.add { '<leader>lg', icon = { icon = mini.get('filetype', 'git'), color = 'orange' } }
+    end
+  end,
 }
