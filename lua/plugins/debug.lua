@@ -127,6 +127,36 @@ return {
     },
     config = function()
       require('dap-python').setup()
+
+      local dap = require 'dap'
+      dap.configurations.python = {
+        {
+          -- For nvim-dap
+          type = 'python',
+          request = 'launch',
+          name = 'Launch file',
+
+          -- For debugpy, more at https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+          program = '${file}',
+          pythonPath = function()
+            local relative_paths = {
+              '/venv/bin/python', -- Linux
+              '/.venv/bin/python',
+              '/venv/Scripts/python', -- Windows
+              '/.venv/Scripts/python',
+            }
+
+            local cwd = vim.fn.getcwd()
+            for _, relative_path in ipairs(relative_paths) do
+              if vim.fn.executable(cwd .. relative_path) == 1 then
+                return cwd .. relative_path
+              end
+            end
+
+            return {}
+          end,
+        },
+      }
     end,
   },
 }

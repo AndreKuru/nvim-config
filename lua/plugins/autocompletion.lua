@@ -10,7 +10,7 @@ return { -- Autocompletion
         -- This step is not supported in many windows environments.
         -- Remove the below condition to re-enable on windows.
         if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-          return
+          return 'make install_jsregexp CC=gcc.exe SHELL=sh.exe .SHELLFLAGS=-c' -- needs sh from git and a gcc installed
         end
         return 'make install_jsregexp'
       end)(),
@@ -51,42 +51,15 @@ return { -- Autocompletion
       -- For an understanding of why these mappings were
       -- chosen, you will need to read `:help ins-completion`
       --
-      -- No, but seriously. Please read `:help ins-completion`, it is really good!
+      -- No, but seriously. TODO: Please read `:help ins-completion`, it is really good!
       mapping = cmp.mapping.preset.insert {
-        -- Select the [n]ext item
         ['<C-n>'] = cmp.mapping.select_next_item(),
-        -- Select the [p]revious item
         ['<C-p>'] = cmp.mapping.select_prev_item(),
-
-        -- Scroll the documentation window [b]ack / [f]orward
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-        -- Accept ([y]es) the completion.
-        --  This will auto-import if your LSP supports it.
-        --  This will expand snippets if the LSP sent a snippet.
         ['<C-y>'] = cmp.mapping.confirm { select = true },
-
-        -- If you prefer more traditional completion keymaps,
-        -- you can uncomment the following lines
-        --['<CR>'] = cmp.mapping.confirm { select = true },
-        --['<Tab>'] = cmp.mapping.select_next_item(),
-        --['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-        -- Manually trigger a completion from nvim-cmp.
-        --  Generally you don't need this, because nvim-cmp will display
-        --  completions whenever it has completion options available.
         ['<C-Space>'] = cmp.mapping.complete {},
         ['<F15>'] = cmp.mapping.complete {}, -- Since powershell doesn't accept <C-Space> I need to redirect it through windows-terminal config to <F15>
-
-        -- Think of <Tab> as moving to the right of your snippet expansion.
-        --  So if you have a snippet that's like:
-        --  function $name($args)
-        --    $body
-        --  end
-        --
-        -- <Tab> will move you to the right of each of the expansion locations.
-        -- <S-Tab> is similar, except moving you backwards.
         ['<Tab>'] = cmp.mapping(function()
           if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
@@ -106,11 +79,7 @@ return { -- Autocompletion
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
       sources = {
-        {
-          name = 'lazydev',
-          -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-          group_index = 0,
-        },
+        { name = 'lazydev', group_index = 0 }, -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },

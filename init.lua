@@ -28,7 +28,6 @@ require('lazy').setup({
   require 'plugins.neo-tree',
 
   require 'plugins.lsp',
-  require 'plugins.roslyn',
   require 'plugins.autoformat',
   require 'plugins.autocompletion',
   require 'plugins.debug',
@@ -36,6 +35,9 @@ require('lazy').setup({
   require 'plugins.vimtex',
   require 'plugins.treesitter',
 
+  -- require 'plugins.none-ls',
+  -- require 'plugins.auto-session',
+  require 'plugins.spelunker',
   require 'plugins.tpope-misc',
   require 'plugins.highlights',
   require 'plugins.mini',

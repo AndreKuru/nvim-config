@@ -58,17 +58,17 @@ return {
       -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
       -- and elegantly composed help section, `:help lsp-vs-treesitter`
 
-      --  This function gets run when an LSP attaches to a particular buffer.
+      --  This f unction gets run when an LSP attaches to a particular buffer.
       --    That is to say, every time a new file is opened that is associated with
       --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-      --    function will be executed to configure the current buffer
+      --    f unction will be executed to configure the current buffer
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
           -- NOTE: Remember that Lua is a real programming language, and as such it is possible
           -- to define small helper and utility functions so you don't have to repeat yourself.
           --
-          -- In this case, we create a function that lets us more easily define mappings specific
+          -- In this case, we create a f unction that lets us more easily define mappings specific
           -- for LSP related items. It sets the mode, buffer and description for us each time.
           local map = function(keys, func, desc, mode)
             mode = mode or 'n'
@@ -76,7 +76,7 @@ return {
           end
 
           -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
+          --  This is where a variable was first declared, or where a f unction is defined, etc.
           --  To jump back, press <C-t>.
           map('<leader>cd', require('telescope.builtin').lsp_definitions, '[C]ode [d]efinition')
 
@@ -142,7 +142,7 @@ return {
           end
 
           -- The following code creates a keymap to toggle inlay hints in your
-          -- code, if the language server you are using supports them
+          -- code, i f the language server you are using supports them
           --
           -- This may be unwanted, since they displace some of your code
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
@@ -181,7 +181,6 @@ return {
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -190,29 +189,55 @@ return {
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
-        ruff = {},
-        pylsp = {
-          settings = {
-            pylsp = {
-              plugins = {
-                pyflakes = { enabled = false },
-                pycodestyle = { enabled = false },
-                autopep8 = { enabled = false },
-                yapf = { enabled = false },
-                mccabe = { enabled = false },
-                pylsp_mypy = { enabled = false },
-                pylsp_black = { enabled = false },
-                pylsp_isort = { enabled = false },
-              },
-            },
-          },
+
+        -- ruff = {
+        -- init_options = {
+        --   settings = {
+        --     args = {},
+        --   },
+        -- },
+        -- mypy = {},
+        black = {},
+        pyright = {
+          --   settings = {
+          --     pyright = {
+          --       autoImportCompletion = true,
+          --       disableOrganizeImports = true,
+          --     },
+          --     python = {
+          --       analysis = {
+          --         ignore = { '*' },
+          --       },
+          --     },
+          --   },
         },
+        -- pylsp = {
+        --   settings = {
+        --     pylsp = {
+        --       plugins = {
+        --         pylsp_black = {
+        --           enabled = true,
+        --           line_length = 88,
+        --           pyflakes = { enabled = false },
+        --           pycodestyle = { enabled = false },
+        --           autopep8 = { enabled = false },
+        --           yapf = { enabled = false },
+        --           mccabe = { enabled = false },
+        --           pylsp_mypy = { enabled = false },
+        --           pylsp_black = { enabled = false },
+        --           pylsp_isort = { enabled = false },
+        --         },
+        --       },
+        --     },
+        --   },
+        -- },
         html = { filetypes = { 'html', 'twig', 'hbs' } },
         cssls = {},
 
         -- tailwindcss = {},
         -- dockerls = {},
-        sqlls = {},
+        -- sqlls = {},
+        sqls = {},
         -- terraformls = {},
         jsonls = {},
         -- yamlls = {},
@@ -236,6 +261,8 @@ return {
             },
           },
         },
+        typos_lsp = {},
+        -- vale_ls = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -292,6 +319,28 @@ return {
           end,
         },
       }
+
+      local lspconfig = require 'lspconfig'
+
+      -- lspconfig.ruff.setup()
+      -- lspconfig.pyright.setup {
+      --   settings = {
+      --     pyright = {
+      --       autoImportCompletion = true,
+      --       disableOrganizeImports = true,
+      --     },
+      --     python = {
+      --       analysis = {
+      --         ignore = { '*' },
+      --       },
+      --     },
+      --   },
+      -- }
     end,
+  },
+  {
+    'seblj/roslyn.nvim',
+    ft = 'cs',
+    opts = {},
   },
 }
