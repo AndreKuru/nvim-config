@@ -238,6 +238,8 @@ return {
         -- dockerls = {},
         -- sqlls = {},
         sqls = {},
+        ['sql-formatter'] = {},
+        sqlfmt = {},
         -- terraformls = {},
         jsonls = {},
         -- yamlls = {},
@@ -261,7 +263,7 @@ return {
             },
           },
         },
-        typos_lsp = {},
+        -- typos_lsp = {},
         -- vale_ls = {},
 
         lua_ls = {

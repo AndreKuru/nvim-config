@@ -31,6 +31,7 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'black', 'ruff', 'isort', stop_after_first = true },
+      sql = { 'sql_formatter', 'sqlfmt', stop_after_first = true },
       -- python = { 'ruff', 'isort', 'black' },
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
     },
